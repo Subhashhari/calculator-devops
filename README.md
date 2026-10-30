@@ -5,7 +5,7 @@ A small Calculator REST API (Java 21, Spring Boot 4, Maven) wrapped in a fully a
 
 A push to `main` triggers Jenkins through a GitHub webhook. Jenkins builds, tests, packages, containerizes, pushes and redeploys the app with no manual steps, then emails the result.
 
-- Docker Hub image: `https://hub.docker.com/r/<dockerhub-user>/calculator-api`
+- Docker Hub image: `https://hub.docker.com/r/subhashh2005/calculator-api`
 
 ---
 
@@ -72,7 +72,7 @@ The Dockerfile is multi-stage. A Maven/JDK 21 stage builds the JAR, with depende
 
 ```bash
 docker compose up -d --wait                                 # uses image calculator-api:latest
-DOCKER_IMAGE=<dockerhub-user>/calculator-api IMAGE_TAG=12 \
+DOCKER_IMAGE=subhashh2005/calculator-api IMAGE_TAG=12 \
   docker compose up -d --wait                               # a specific pipeline build
 docker compose ps
 curl -i "localhost:8090/api/v1/add?a=2&b=3"                 # X-Upstream header shows which replica answered
