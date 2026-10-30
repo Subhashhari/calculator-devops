@@ -1,0 +1,16 @@
+# Keep the build context small and free of local/secret files
+target/
+.git/
+.gitignore
+.gitattributes
+.idea/
+.vscode/
+*.iml
+*.md
+docs/
+nginx/
+Jenkinsfile
+docker-compose*.yml
+.env
+*.env
+*.log
