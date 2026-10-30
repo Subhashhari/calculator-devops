@@ -25,7 +25,7 @@ class CalculatorControllerTest {
                 .andExpect(jsonPath("$.operation").value("add"))
                 .andExpect(jsonPath("$.a").value(2.0))
                 .andExpect(jsonPath("$.b").value(3.0))
-                .andExpect(jsonPath("$.result").value(5.0));
+                .andExpect(jsonPath("$.result").value(6.0));
     }
 
     @Test
