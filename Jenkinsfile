@@ -66,12 +66,18 @@ pipeline {
 
         stage('Push') {
             steps {
-                sh '''
-                    IMAGE="$DOCKERHUB_USR/$IMAGE_NAME"
-                    echo "$DOCKERHUB_PSW" | docker login -u "$DOCKERHUB_USR" --password-stdin
-                    docker push "$IMAGE:$IMAGE_TAG"
-                    docker push "$IMAGE:latest"
-                '''
+                // A stalled upload once hung this stage until the build timed out:
+                // abandon an attempt after 4 minutes and retry (layers already pushed are skipped)
+                retry(3) {
+                    timeout(time: 4, unit: 'MINUTES') {
+                        sh '''
+                            IMAGE="$DOCKERHUB_USR/$IMAGE_NAME"
+                            echo "$DOCKERHUB_PSW" | docker login -u "$DOCKERHUB_USR" --password-stdin
+                            docker push "$IMAGE:$IMAGE_TAG"
+                            docker push "$IMAGE:latest"
+                        '''
+                    }
+                }
             }
         }
 
